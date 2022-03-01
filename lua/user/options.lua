@@ -17,7 +17,7 @@ local options = {
   splitright = true,
   swapfile = false, -- TODO: what is a swapfile and why am I disabling it?
   termguicolors = true,
-  timeoutlen = 100,
+  timeoutlen = 1000,
   undofile = true,
   -- updatetime = 300, -- 4000ms default update time for completion. Which do I want?
   writebackup = false, -- TODO: what does this do?
@@ -32,7 +32,7 @@ local options = {
   wrap = true,
   scrolloff = 8,
   sidescrolloff = 8,
-  guifont = "MesloLGS NF:h16",
+  guifont = "Fira Code:h16",
 }
 
 vim.opt.shortmess:append "c" -- TODO: why the linting error?
