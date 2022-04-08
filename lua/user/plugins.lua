@@ -53,6 +53,7 @@ return packer.startup(function(use)
   use "ellisonleao/gruvbox.nvim"
   use 'kyazdani42/nvim-web-devicons'
   use 'kyazdani42/nvim-tree.lua'
+  use {'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons', branch = 'main'}
 
   use {
     'neovim/nvim-lspconfig',
@@ -65,6 +66,16 @@ return packer.startup(function(use)
     run = ":TSUpdate",
   }
   use 'windwp/nvim-autopairs'
+
+  use {
+    'nvim-telescope/telescope.nvim',
+    requires = { {'nvim-lua/plenary.nvim'} }
+  }
+  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+
+  use 'xiyaowong/which-key.nvim'
+  use {'stevearc/dressing.nvim'}
+  use {'mrjones2014/legendary.nvim'}
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
