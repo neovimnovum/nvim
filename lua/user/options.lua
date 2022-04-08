@@ -32,7 +32,7 @@ local options = {
   wrap = true,
   scrolloff = 8,
   sidescrolloff = 8,
-  guifont = "Fira Code:h16",
+  guifont = "Fira Mono:h16",
 }
 
 vim.opt.shortmess:append "c" -- TODO: why the linting error?
