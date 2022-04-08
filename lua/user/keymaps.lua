@@ -5,48 +5,78 @@ local opts = { noremap = true, silent = true }
 local keymap = vim.api.nvim_set_keymap
 
 --Set leader key
-keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- Normal Mode --
+-- Initialize legendary keymaps
+local helpers = require('legendary.helpers')
+require('which-key').setup()
+local legendary = require('legendary')
 
-keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-j>", "<C-w>j", opts)
-keymap("n", "<C-k>", "<C-w>k", opts)
-keymap("n", "<C-l>", "<C-w>l", opts)
+legendary.setup({
+  -- Include builtins by default, set to false to disable
+  include_builtin = true,
+  -- Customize the prompt that appears on your vim.ui.select() handler
+  -- Can be a string or a function that takes the `kind` and returns
+  -- a string. See "Item Kinds" below for details.
+  select_prompt = function(kind)
+    if kind == 'legendary.items' then
+      return 'Legendary'
+    end
 
--- Resize
-keymap("n", "<C-Up>", ":resize -2<CR>", opts)
-keymap("n", "<C-Down>", ":resize +2<CR>", opts)
-keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
-keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
-
--- Switching buffers
-keymap("n", "<S-l>", ":bnext<CR>", opts)
-keymap("n", "<S-h>", ":bprevious<CR>", opts)
+    -- Convert kind to Title Case (e.g. legendary.keymaps => Legendary Keymaps)
+    return string.gsub(' ' .. kind:gsub('%.', ' '), '%W%l', string.upper):sub(2)
+  end,
+  -- Initial keymaps to bind
+  keymaps = {
+    { '<C-h>', '<C-w>h', description = 'Move cursor to window left', opts = opts },
+    { '<C-j>', '<C-w>j', description = 'Move cursor to window down', opts = opts },
+    { '<C-k>', '<C-w>k', description = 'Move cursor to window up', opts = opts },
+    { '<C-l>', '<C-w>l', description = 'Move cursor to window right', opts = opts },
+    { '<C-Up>', ':resize -2<CR>', description = 'Grow top split', opts = opts },
+    { '<C-Down>', ':resize +2<CR>', description = 'Grow bottom split', opts = opts },
+    { '<C-Left>', ':vertical resize -2<CR>', description = 'Grow left split', opts = opts },
+    { '<C-Right>', ':vertical resize +2<CR>', description = 'Grow right split', opts = opts },
+    { '<S-l>', ':bnext<CR>', description = 'Switch to buffer right', opts = opts },
+    { '<S-h>', ':bprevious<CR>', description = 'Switch to buffer left', opts = opts },
+    { '<leader>e', ':NvimTreeToggle<CR>', description = 'Open NvimTree', opts = opts },
+    { '<leader>ff', helpers.lazy_required_fn('telescope.builtin', 'find_files'), description = 'Telescope find files', opts = opts },
+    { '<leader>fg', helpers.lazy_required_fn('telescope.builtin', 'live_grep'), description = 'Telescope live grep', opts = opts },
+    { '<leader>fb', helpers.lazy_required_fn('telescope.builtin', 'buffers'), description = 'Telescope find buffer', opts = opts },
+    { '<leader>fh', helpers.lazy_required_fn('telescope.builtin', 'help_tags'), description = 'Telescope find help', opts = opts},
+    { '<leader>k', legendary.find, description = 'Keymap legend', opts = opts },
+  },
+  -- Initial commands to bind
+  commands = {
+    -- your command tables here
+  },
+  -- Initial augroups and autocmds to bind
+  autocmds = {
+    -- your autocmd tables here
+  },
+  -- Automatically add which-key tables to legendary
+  -- see "which-key.nvim Integration" below for more details
+  auto_register_which_key = true,
+})
 
 -- Move a block of text
-keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
-keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
+-- keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
+-- keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
 
 
 -- Visual Mode --
 -- Indent text
-keymap("v", "<", "<gv", opts)
-keymap("v", ">", ">gv", opts)
+-- keymap("v", "<", "<gv", opts)
+-- keymap("v", ">", ">gv", opts)
 
 -- Move text
-keymap("v", "<A-j>", "<Esc>:m .+1<CR>==", opts)
-keymap("v", "<A-k>", "<Esc>:m .-2<CR>==", opts)
-keymap("v", "p", '"_dP', opts)
+-- keymap("v", "<A-j>", "<Esc>:m .+1<CR>==", opts)
+-- keymap("v", "<A-k>", "<Esc>:m .-2<CR>==", opts)
+-- keymap("v", "p", '"_dP', opts)
 
 -- Visual Block --
 -- Move text
-keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
-keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
-keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
-keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
-
--- Open filesystem browser
-keymap("n", "<leader>e", ":NvimTreeToggle<cr>", opts)
+-- keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
+-- keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
+-- keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
+-- keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
