@@ -4,12 +4,8 @@ local opts = { noremap = true, silent = true }
 
 local keymap = vim.api.nvim_set_keymap
 
---Set leader key
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
 
 -- Initialize legendary keymaps
-local helpers = require('legendary.helpers')
 require('which-key').setup()
 local legendary = require('legendary')
 
@@ -40,10 +36,6 @@ legendary.setup({
     { '<S-l>', ':bnext<CR>', description = 'Switch to buffer right', opts = opts },
     { '<S-h>', ':bprevious<CR>', description = 'Switch to buffer left', opts = opts },
     { '<leader>e', ':NvimTreeToggle<CR>', description = 'Open NvimTree', opts = opts },
-    { '<leader>ff', helpers.lazy_required_fn('telescope.builtin', 'find_files'), description = 'Telescope find files', opts = opts },
-    { '<leader>fg', helpers.lazy_required_fn('telescope.builtin', 'live_grep'), description = 'Telescope live grep', opts = opts },
-    { '<leader>fb', helpers.lazy_required_fn('telescope.builtin', 'buffers'), description = 'Telescope find buffer', opts = opts },
-    { '<leader>fh', helpers.lazy_required_fn('telescope.builtin', 'help_tags'), description = 'Telescope find help', opts = opts},
     { '<leader>k', legendary.find, description = 'Keymap legend', opts = opts },
   },
   -- Initial commands to bind
@@ -56,7 +48,6 @@ legendary.setup({
   },
   -- Automatically add which-key tables to legendary
   -- see "which-key.nvim Integration" below for more details
-  auto_register_which_key = true,
 })
 
 -- Move a block of text

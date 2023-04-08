@@ -13,6 +13,7 @@ local options = {
   showtabline = 2,
   smartcase = true, -- disable ignorecase if upper case char in search
   smartindent = true, -- TODO: figure out difference between this and autoindent
+  autoindent = true,
   splitbelow = true,
   splitright = true,
   swapfile = false, -- TODO: what is a swapfile and why am I disabling it?
@@ -26,13 +27,13 @@ local options = {
   tabstop = 2,
   cursorline = true,
   number = true,
-  relativenumber = true,
+  relativenumber = false,
   numberwidth = 4,
   signcolumn = "yes",
   wrap = true,
   scrolloff = 8,
   sidescrolloff = 8,
-  guifont = "Fira Mono:h16",
+  guifont = "SauceCodePro Nerd Font Mono:h16",
 }
 
 vim.opt.shortmess:append "c" -- TODO: why the linting error?
