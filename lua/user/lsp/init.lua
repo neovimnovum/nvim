@@ -40,16 +40,16 @@ table.insert(require("lint").linters.cpplint.args, '--filter=-legal/copyright,-w
 table.insert(require("lint").linters.cpplint.args, '--linelength=132')
 table.insert(require("lint").linters.cppcheck.args, '--suppress=missingIncludeSystem')
 table.insert(require("lint").linters.cppcheck.args, '--project=compile_commands.json')
-vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-  callback = function()
-    require("lint").try_lint()
-  end,
-})
-vim.api.nvim_create_autocmd({ "BufReadPost" }, {
-  callback = function()
-    require("lint").try_lint()
-  end,
-})
+--vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+--  callback = function()
+--    require("lint").try_lint()
+--  end,
+--})
+--vim.api.nvim_create_autocmd({ "BufReadPost" }, {
+--  callback = function()
+--    require("lint").try_lint()
+--  end,
+--})
 
 require("mini.completion").setup();
 
